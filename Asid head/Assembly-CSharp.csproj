@@ -62,10 +62,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Book.cs" />
+    <Compile Include="Assets\Cash.cs" />
+    <Compile Include="Assets\Controller.cs" />
+    <Compile Include="Assets\Dialog.cs" />
+    <Compile Include="Assets\DialogManager.cs" />
+    <Compile Include="Assets\DialogTrigger.cs" />
+    <Compile Include="Assets\DragDrop.cs" />
+    <Compile Include="Assets\GameController.cs" />
+    <Compile Include="Assets\Inventory.cs" />
+    <Compile Include="Assets\Item.cs" />
+    <Compile Include="Assets\ItemAssets.cs" />
+    <Compile Include="Assets\ItemSlot.cs" />
+    <Compile Include="Assets\ItemWorld.cs" />
+    <Compile Include="Assets\OrderSlot.cs" />
+    <Compile Include="Assets\Paper.cs" />
+    <Compile Include="Assets\Phone.cs" />
+    <Compile Include="Assets\Player.cs" />
+    <Compile Include="Assets\ResultPanel.cs" />
+    <Compile Include="Assets\SceneTransitions.cs" />
     <Compile Include="Assets\Scripts\Client.cs" />
     <Compile Include="Assets\Scripts\DataHolder.cs" />
-    <Compile Include="Assets\Scripts\DialogController.cs" />
+    <Compile Include="Assets\Scripts\Order.cs" />
+    <Compile Include="Assets\Scripts\Tablet.cs" />
+    <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\TurnController.cs" />
+    <Compile Include="Assets\UI_Inventory.cs" />
+    <Compile Include="Assets\Warning.cs" />
+    <Compile Include="Assets\Workspace.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

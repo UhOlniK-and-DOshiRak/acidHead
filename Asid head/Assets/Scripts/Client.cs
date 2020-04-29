@@ -6,18 +6,21 @@ public class Client : MonoBehaviour
 {
     public float speed;
     Transform stopPoint, gonePoint;
-    bool onStopPoint;
+    bool onStopPoint, alreadySelected;
     public GameObject onStopIcon;
+    DialogTrigger dialogTrigger;
 
-    DialogController dialogController;
+    //DialogController dialogController;
 
     private void Start()
     {
-        dialogController = GameObject.FindGameObjectWithTag("ClientMenu").GetComponent<DialogController>();
+        //dialogController = GameObject.FindGameObjectWithTag("ClientMenu").GetComponent<DialogController>();
         stopPoint = GameObject.FindGameObjectWithTag("Player").transform;
         gonePoint = GameObject.Find("ClientGonePoint").GetComponent<Transform>();
         onStopPoint = false;
         DataHolder.currentClientComplete = false;
+        dialogTrigger = GetComponent<DialogTrigger>();
+        alreadySelected = false;
     }
 
     private void Update()
@@ -47,14 +50,18 @@ public class Client : MonoBehaviour
                 }
             }
         }
+
     }
 
     private void OnMouseDown()
     {
-        if (onStopPoint == true && DataHolder.currentClientComplete == false)
+        if (onStopPoint == true && DataHolder.currentClientComplete == false && alreadySelected == false)
         {
             Destroy(onStopIcon);
-            dialogController.initDialog();
+            dialogTrigger.TriggerDialog();
+            alreadySelected = true;
+            //DataHolder.currentClientComplete = true;
+            //dialogController.initDialog();
         }
     }
 }

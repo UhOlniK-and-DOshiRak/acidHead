@@ -16,11 +16,14 @@ public class TurnController : MonoBehaviour
 
     private void Update()
     {
-        if (GameObject.FindGameObjectsWithTag("Client").Length == 0 && currentClientIndex < clients.Length)
+        if (DataHolder.dayStarted)
         {
-            showNewClient();
-            Debug.Log("Client #"+currentClientIndex+" appears");
-            currentClientIndex++;
+            if (GameObject.FindGameObjectsWithTag("Client").Length == 0 && currentClientIndex < clients.Length)
+            {
+                showNewClient();
+                Debug.Log("Client #" + currentClientIndex + " appears");
+                currentClientIndex++;
+            }
         }
     }
 

@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Client
   - ClientMenu
+  - ObjectPositions
+  - Package
+  - Paper
+  - Tabacco
+  - PosTabacco
+  - Cash
   layers:
   - Default
   - TransparentFX
