@@ -116,7 +116,7 @@ public class Workspace : MonoBehaviour
                 player.ReduceMoney(orderSlot.EnoughCash());
             }
         }
-        if (orderSlot.isItems() && orderSlot.isPapers() && orderSlot.NoExtraItem() == 0 && orderSlot.EnoughCash() == 0 && DialogManager.isMoney)
+        if (orderSlot.isItems() && orderSlot.isPapers() && orderSlot.NoExtraItem() == 0 && orderSlot.EnoughCash() == 0 && DialogManager.isMoney && checkLimits(GameObject.FindGameObjectWithTag("Client").GetComponent<Order>(), player))
         {
             Debug.Log("Correct order");
             FindObjectOfType<Player>().AddAuthority(5);            
@@ -137,5 +137,21 @@ public class Workspace : MonoBehaviour
         book.SetActive(true);
     }
 
-    
+    bool checkLimits(Order order, Player player)
+    {
+        if (checkName(order, player)) return true;
+        return false;
+    }
+
+    bool checkName(Order order, Player player)
+    {
+        if (order.wrongName) {
+            InstantiateWarning(Warning.WarningType.WrongName);
+            player.ReduceAuthority(5);
+            return false;
+        }
+        return true;
+    }
+
+
 }

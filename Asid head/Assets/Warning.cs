@@ -16,6 +16,7 @@ public class Warning : MonoBehaviour
         ExtraItem,
         NoReasonRefuse,
         GetMoneyRefuse,
+        WrongName
     }
 
     void Start()
@@ -43,6 +44,7 @@ public class Warning : MonoBehaviour
             case WarningType.NotEnoughMoney: text.text = "Кажется, ты взял недостаточную плату. Твой кошелёк теперь постарадает :("; break;
             case WarningType.NoReasonRefuse: text.text = "Если продолжишь без причины отказывать клиентам, они больше не будут приходить. Авторитет снижен."; break;
             case WarningType.GetMoneyRefuse: text.text = "Ты взял деньги, но не отдал товар. Надеюсь, эта сумма стоит твоего авторитета."; break;
+            case WarningType.WrongName: text.text = "Клиент сказал неправильное кодовое название. Впредь слушай внимательнее."; break;
         }
     }
 }

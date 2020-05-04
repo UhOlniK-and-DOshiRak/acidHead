@@ -21,7 +21,6 @@ public class TurnController : MonoBehaviour
             if (GameObject.FindGameObjectsWithTag("Client").Length == 0 && currentClientIndex < clients.Length)
             {
                 showNewClient();
-                Debug.Log("Client #" + currentClientIndex + " appears");
                 currentClientIndex++;
             }
         }

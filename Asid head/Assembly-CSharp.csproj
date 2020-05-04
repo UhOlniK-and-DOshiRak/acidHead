@@ -80,6 +80,7 @@
     <Compile Include="Assets\Phone.cs" />
     <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\ResultPanel.cs" />
+    <Compile Include="Assets\Scales.cs" />
     <Compile Include="Assets\SceneTransitions.cs" />
     <Compile Include="Assets\Scripts\Client.cs" />
     <Compile Include="Assets\Scripts\DataHolder.cs" />

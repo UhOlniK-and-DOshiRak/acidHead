@@ -5,29 +5,12 @@ using UnityEngine;
 public class Order : MonoBehaviour
 {
     //public Product[] products;
+    public bool wrongName;
     public Cash[] cash;
     [SerializeField] private int cashAmount;
     [SerializeField] private List<Item> items;
     [SerializeField] private int price;
     [SerializeField] private Item paper;
-
-    //[System.Serializable]
-    //public class Product
-    //{        
-    //    public string name;
-    //    public int price;
-    //    public int quantity;
-    //    public Tablet tablet;
-    //}
-
-    //void Start()
-    //{
-    //    foreach (Product product in products)
-    //    {
-    //        product.price = (product.quantity / product.tablet.weight) * product.tablet.priceForPortion;
-    //        //product.name = product.tablet.names[Random.Range(0, product.tablet.names.Length)];
-    //    }
-    //}
 
     private void Start()
     {

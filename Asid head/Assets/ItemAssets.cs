@@ -18,6 +18,7 @@ public class ItemAssets : MonoBehaviour
     public Sprite morphineSprite;
     public Sprite marijuanaSprite;
     public Sprite tabaccoSprite;
+    public Sprite paperSprite;
 
     public RectTransform itemWorld;
 

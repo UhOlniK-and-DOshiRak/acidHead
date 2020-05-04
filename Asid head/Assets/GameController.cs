@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public TextMeshProUGUI clientsCountUI;
-    public GameObject phone, timer;
+    public GameObject phone, timer, pauseMenu;
     public int targetMoney;
     public int foodCost, rentCost;
     public int sceneIndex;
+
+    public bool checkNames;
 
     void Start()
     {
@@ -19,6 +21,10 @@ public class GameController : MonoBehaviour
 
         DataHolder.clientsCount = 0;
         DataHolder.dayStarted = false;
+        DataHolder.daysHome = PlayerPrefs.GetInt("DaysHome", 3);
+        DataHolder.daysFood = PlayerPrefs.GetInt("DaysFood", 3);
+        DataHolder.daysDebt = PlayerPrefs.GetInt("DaysDebt", 2);
+        DataHolder.nameCheckEnabled = checkNames;
         Phone();
         phone.GetComponent<Animator>().SetTrigger("appear");
     }
@@ -52,4 +58,23 @@ public class GameController : MonoBehaviour
         FindObjectOfType<DialogManager>().continueButton.SetActive(true);
         FindObjectOfType<Player>().GetComponent<DialogTrigger>().TriggerDialog();
     }
+
+    public void Pause()
+    {
+        Time.timeScale = 0.0f;
+        pauseMenu.SetActive(true);
+    }
+
+    public void Continue()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1.0f;
+    }
+
+    public void ToMainMenu()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(0);
+    }
+    
 }

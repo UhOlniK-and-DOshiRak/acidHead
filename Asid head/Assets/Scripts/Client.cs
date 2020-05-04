@@ -57,6 +57,7 @@ public class Client : MonoBehaviour
     {
         if (onStopPoint == true && DataHolder.currentClientComplete == false && alreadySelected == false)
         {
+            Debug.Log("Order price: " + GetComponent<Order>().GetPrice());
             Destroy(onStopIcon);
             dialogTrigger.TriggerDialog();
             alreadySelected = true;

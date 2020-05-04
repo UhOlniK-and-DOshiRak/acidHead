@@ -11,6 +11,7 @@ public class ResultPanel : MonoBehaviour
     public Toggle rentT, foodT, debtT;
     int currentCash, currentDebt, currentSalary, currentAuthority, foodCost, rentCost;
     public GameObject results, expenses, warningText;
+    public Text daysHome, daysFood, daysDebt;
 
     void Start()
     {
@@ -35,6 +36,23 @@ public class ResultPanel : MonoBehaviour
         clients.text = DataHolder.clientsCount.ToString();
         salary.text = currentSalary.ToString();
         debt.text = currentDebt.ToString();
+
+        if (DataHolder.daysHome > 1)
+            daysHome.text = DataHolder.daysHome.ToString() + " дня";
+        else
+            daysHome.text = DataHolder.daysHome.ToString() + " день";
+
+        if (DataHolder.daysFood > 1)
+            daysFood.text = DataHolder.daysFood.ToString() + " дня";
+        else
+            daysFood.text = DataHolder.daysFood.ToString() + " день";
+
+        if (DataHolder.daysDebt > 1)
+            daysDebt.text = DataHolder.daysDebt.ToString() + " дня";
+        else
+            daysDebt.text = DataHolder.daysDebt.ToString() + " день";
+
+
         StartCoroutine(Result());
     }
 
@@ -108,12 +126,68 @@ public class ResultPanel : MonoBehaviour
             if (debtT.isOn)
             {
                 PlayerPrefs.SetInt("Debt", 0);
+                PlayerPrefs.SetInt("DaysDebt", 2);
             }
             else
             {
-                PlayerPrefs.SetInt("Debt", currentDebt);
+                if (DataHolder.daysDebt > 1)
+                {
+                    PlayerPrefs.SetInt("Debt", currentDebt);
+                    PlayerPrefs.SetInt("DaysDebt", DataHolder.daysDebt - 1);
+                }
+                else
+                {
+                    Debug.Log("Game Over! Debt");
+                }
             }
             PlayerPrefs.SetInt("Authority", currentAuthority);
+
+            if (rentT.isOn)
+            {
+                if (DataHolder.daysHome < 3)
+                {
+                    PlayerPrefs.SetInt("DaysHome", DataHolder.daysHome + 1);
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("DaysHome", DataHolder.daysHome);
+                }
+            }
+            else
+            {
+                if (DataHolder.daysHome > 1)
+                {
+                    PlayerPrefs.SetInt("DaysHome", DataHolder.daysHome - 1);
+                }
+                else
+                {
+                    Debug.Log("Game Over! Rent");
+                }
+            }
+
+            if (foodT.isOn)
+            {
+                if (DataHolder.daysFood < 3)
+                {
+                    PlayerPrefs.SetInt("DaysFood", DataHolder.daysFood + 1);
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("DaysFood", DataHolder.daysFood);
+                }
+            }
+            else
+            {
+                if (DataHolder.daysFood > 1)
+                {
+                    PlayerPrefs.SetInt("DaysFood", DataHolder.daysFood - 1);
+                }
+                else
+                {
+                    Debug.Log("Game Over! Food");
+                }
+            }
+
 
             if (sceneIndex == 2)
             {

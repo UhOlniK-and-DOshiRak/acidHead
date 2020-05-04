@@ -39,6 +39,7 @@ public class Item
             case ItemType.Morphine: return ItemAssets.Instance.morphineSprite;
             case ItemType.Marijuana: return ItemAssets.Instance.marijuanaSprite;
             case ItemType.Tabacco: return ItemAssets.Instance.tabaccoSprite;
+            case ItemType.Paper: return ItemAssets.Instance.paperSprite;
         }
     }
 
@@ -93,6 +94,25 @@ public class Item
             case ItemType.Marijuana: return "Marijuana";
             case ItemType.Tabacco: return "Tabacco";
             case ItemType.Paper: return "Paper";
+        }
+    }
+
+    public string GetRussianName()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.Methamphetamine: return "Метамфетамин";
+            case ItemType.Methadone: return "Метадон";
+            case ItemType.Ecstasy1: return "Экстази";
+            case ItemType.Ecstasy2: return "Экстази";
+            case ItemType.Ecstasy3: return "Экстази";
+            case ItemType.Ecstasy4: return "Экстази";
+            case ItemType.Hashish: return "Гашиш";
+            case ItemType.Morphine: return "Морфин";
+            case ItemType.Marijuana: return "Марихуана";
+            case ItemType.Tabacco: return "Tabacco";
+            case ItemType.Paper: return "Косяк";
         }
     }
 
