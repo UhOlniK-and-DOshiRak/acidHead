@@ -71,6 +71,7 @@ public class UI_Inventory : MonoBehaviour
 
     public void onClick(Item item)
     {
+        FindObjectOfType<Sound>().ButtonSound();
         ItemWorld.DropItem(item);
         inventory.RemoveItem(new Item { itemType = item.itemType, amount = 1 });
     }  

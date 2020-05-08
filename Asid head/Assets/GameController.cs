@@ -13,6 +13,10 @@ public class GameController : MonoBehaviour
     public int sceneIndex;
 
     public bool checkNames;
+    public bool checkAge;
+    public bool checkSum;
+
+    public int maxOrderSum;
 
     void Start()
     {
@@ -25,6 +29,9 @@ public class GameController : MonoBehaviour
         DataHolder.daysFood = PlayerPrefs.GetInt("DaysFood", 3);
         DataHolder.daysDebt = PlayerPrefs.GetInt("DaysDebt", 2);
         DataHolder.nameCheckEnabled = checkNames;
+        DataHolder.ageCheckEnabled = checkAge;
+        DataHolder.sumCheckEnabled = checkSum;
+        DataHolder.maxSum = maxOrderSum;
         Phone();
         phone.GetComponent<Animator>().SetTrigger("appear");
     }
@@ -43,7 +50,9 @@ public class GameController : MonoBehaviour
 
     public void Phone()
     {
-        phone.SetActive(true);        
+
+        phone.SetActive(true);
+        FindObjectOfType<Sound>().MessageSound();
     }
 
     public void EndDay()
@@ -61,18 +70,21 @@ public class GameController : MonoBehaviour
 
     public void Pause()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         Time.timeScale = 0.0f;
         pauseMenu.SetActive(true);
     }
 
     public void Continue()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
     }
 
     public void ToMainMenu()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(0);
     }

@@ -16,7 +16,9 @@ public class Warning : MonoBehaviour
         ExtraItem,
         NoReasonRefuse,
         GetMoneyRefuse,
-        WrongName
+        WrongName,
+        WrongAge,
+        WrongSum
     }
 
     void Start()
@@ -45,6 +47,8 @@ public class Warning : MonoBehaviour
             case WarningType.NoReasonRefuse: text.text = "Если продолжишь без причины отказывать клиентам, они больше не будут приходить. Авторитет снижен."; break;
             case WarningType.GetMoneyRefuse: text.text = "Ты взял деньги, но не отдал товар. Надеюсь, эта сумма стоит твоего авторитета."; break;
             case WarningType.WrongName: text.text = "Клиент сказал неправильное кодовое название. Впредь слушай внимательнее."; break;
+            case WarningType.WrongAge: text.text = "Ты хочешь, чтобы детишки попадали в больницы? Разве тебе их не жалко?"; break;
+            case WarningType.WrongSum: text.text = "Заказ на слишком большую сумму!"; break;
         }
     }
 }

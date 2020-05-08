@@ -62,6 +62,7 @@ public class Scales : MonoBehaviour
 
     public void ChangeItem()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         currentCount = 1;
         count.text = currentCount.ToString();
         currentItem = items[dropdown.value];
@@ -75,6 +76,7 @@ public class Scales : MonoBehaviour
 
     public void Increase()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         currentCount += 1;
         count.text = currentCount.ToString();
         currentPrice += currentItem.GetPrice();
@@ -86,6 +88,7 @@ public class Scales : MonoBehaviour
 
     public void Decrease()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         if (currentCount > 1)
         {
             currentCount -= 1;
@@ -100,6 +103,7 @@ public class Scales : MonoBehaviour
 
     public void Add()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         priceForAll += currentPrice;
         totalPrice.text = priceForAll.ToString();
         currentCount = 1;
@@ -113,6 +117,7 @@ public class Scales : MonoBehaviour
 
     public void Clear()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         priceForAll = 0;
         totalPrice.text = priceForAll.ToString();
         dropdown.value = 0;

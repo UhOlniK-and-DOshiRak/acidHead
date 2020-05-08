@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
         inventory = new Inventory(items);
         uI_Inventory.SetInventory(inventory);
 
-        authority = PlayerPrefs.GetInt("Authority", 50);
+        authority = PlayerPrefs.GetInt("Authority", 30);
         money = PlayerPrefs.GetInt("Money", 50);
         //money = GameController.money;
         //authority = GameController.authority;

@@ -23,6 +23,10 @@ public class TurnController : MonoBehaviour
                 showNewClient();
                 currentClientIndex++;
             }
+            if (currentClientIndex == clients.Length && GameObject.FindGameObjectsWithTag("Client").Length == 0)
+            {
+                Time.timeScale = 15f;
+            }
         }
     }
 

@@ -20,16 +20,19 @@ public class Book : MonoBehaviour, IDragHandler
 
     public void ToPage1()
     {
+        FindObjectOfType<Sound>().BookSound();
         page1.SetActive(true);
     }
 
     public void ToPage2()
     {
+        FindObjectOfType<Sound>().BookSound();
         page1.SetActive(false);
     }
 
     public void Close()
     {
+        FindObjectOfType<Sound>().BookSound();
         rectTransform.anchoredPosition = initialRectTransform;
         gameObject.SetActive(false);
     }

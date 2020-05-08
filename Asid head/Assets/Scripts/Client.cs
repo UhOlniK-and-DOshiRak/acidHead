@@ -10,6 +10,15 @@ public class Client : MonoBehaviour
     public GameObject onStopIcon;
     DialogTrigger dialogTrigger;
 
+    public enum ClientType
+    {
+        Female,
+        Male,        
+        Child
+    }
+
+    public ClientType type;
+
     //DialogController dialogController;
 
     private void Start()
@@ -27,7 +36,7 @@ public class Client : MonoBehaviour
     {
         if (onStopPoint == false)
         {
-            if (Vector2.Distance(transform.position, stopPoint.position) > 2f)
+            if (Vector2.Distance(transform.position, stopPoint.position) > 3f)
             {
                 transform.position = Vector2.MoveTowards(transform.position, stopPoint.position, speed * Time.deltaTime);
             }
@@ -57,6 +66,7 @@ public class Client : MonoBehaviour
     {
         if (onStopPoint == true && DataHolder.currentClientComplete == false && alreadySelected == false)
         {
+            FindObjectOfType<Sound>().ButtonSound();
             Debug.Log("Order price: " + GetComponent<Order>().GetPrice());
             Destroy(onStopIcon);
             dialogTrigger.TriggerDialog();

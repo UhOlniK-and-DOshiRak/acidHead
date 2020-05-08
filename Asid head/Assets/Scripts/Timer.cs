@@ -10,9 +10,11 @@ public class Timer : MonoBehaviour
     public int sec;
     int totalSeconds = 0;
     int TOTAL_SECONDS = 0;
+    public float waitfor;
     
     void Start()
     {
+        waitfor = 1f;
         timeText.text = minutes + ":" + sec;
         if (minutes > 0)
             totalSeconds += minutes * 60;
@@ -24,7 +26,7 @@ public class Timer : MonoBehaviour
 
     IEnumerator second()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(waitfor);
         if (sec > 0)
             sec--;
         if (sec == 0 && minutes != 0)
@@ -41,7 +43,13 @@ public class Timer : MonoBehaviour
         if (sec == 0 && minutes == 0 && DataHolder.dayStarted)
         {
             //StopCoroutine(second());
+            Time.timeScale = 1.0f;
             FindObjectOfType<GameController>().EndDay();
         }
+    }
+
+    public void SetWaitFor(float amount)
+    {
+        waitfor = amount;
     }
 }

@@ -12,6 +12,11 @@ public class OrderSlot : MonoBehaviour, IDropHandler
     [SerializeField] private List<Item> items;
     //bool isPackage;
 
+        public int GetPapersCount()
+    {
+        return papers.Count;
+    }
+
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -20,6 +25,10 @@ public class OrderSlot : MonoBehaviour, IDropHandler
         itemSlots = new List<ItemSlot>();
         papers = new List<Paper>();
         //isPackage = false;
+    }
+
+    public List<Item> GetItems() {
+        return items;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -80,97 +89,97 @@ public class OrderSlot : MonoBehaviour, IDropHandler
         papers = new List<Paper>();
     }
 
-    public bool isPapers()
-    {        
-        int paperCount = GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetPapers();        
-        bool noPaper = false;        
-        if (paperCount != papers.Count)
-        {
-            noPaper = true;
-        }
-        return !noPaper;
-    }
+    //public bool isPapers()
+    //{        
+    //    int paperCount = GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetPapers();        
+    //    bool noPaper = false;        
+    //    if (paperCount != papers.Count)
+    //    {
+    //        noPaper = true;
+    //    }
+    //    return !noPaper;
+    //}
 
-    public bool isItems()
-    {
-        List<Item> orderItems = GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetItems();
-        bool isItem = false;
-        bool noItem = false;        
-        foreach (Item orderItem in orderItems)
-        {
-            if (orderItem.GetName() != "Ecstasy")
-            {
-                foreach (Item item in items)
-                {
-                    if (orderItem.GetName() == item.GetName())
-                    {
-                        if (orderItem.amount >= item.amount)
-                            isItem = true;
-                    }
-                }
-                if (isItem) continue;
-                else
-                {
-                    noItem = true;
-                }
-            }
-        }
-        int orderAmount = 0;
-        foreach (Item orderItem in orderItems)
-        {
-            if (orderItem.GetName() == "Ecstasy")
-            {
-                orderAmount += orderItem.amount;
-            }
-        }
-        int amount = 0;
-        foreach (Item item in items)
-        {
-            if (item.GetName() == "Ecstasy")
-            {
-                amount += item.amount;
-            }
-        }
-        if (orderAmount > amount)
-        {
-            noItem = true;
-        }        
-        if (items.Count == 0 && orderItems.Count != 0) noItem = true;
-        return !noItem;
-    }
+    //public bool isItems()
+    //{
+    //    List<Item> orderItems = GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetItems();
+    //    bool isItem = false;
+    //    bool noItem = false;        
+    //    foreach (Item orderItem in orderItems)
+    //    {
+    //        if (orderItem.GetName() != "Ecstasy")
+    //        {
+    //            foreach (Item item in items)
+    //            {
+    //                if (orderItem.GetName() == item.GetName())
+    //                {
+    //                    if (orderItem.amount >= item.amount)
+    //                        isItem = true;
+    //                }
+    //            }
+    //            if (isItem) continue;
+    //            else
+    //            {
+    //                noItem = true;
+    //            }
+    //        }
+    //    }
+    //    int orderAmount = 0;
+    //    foreach (Item orderItem in orderItems)
+    //    {
+    //        if (orderItem.GetName() == "Ecstasy")
+    //        {
+    //            orderAmount += orderItem.amount;
+    //        }
+    //    }
+    //    int amount = 0;
+    //    foreach (Item item in items)
+    //    {
+    //        if (item.GetName() == "Ecstasy")
+    //        {
+    //            amount += item.amount;
+    //        }
+    //    }
+    //    if (orderAmount > amount)
+    //    {
+    //        noItem = true;
+    //    }        
+    //    if (items.Count == 0 && orderItems.Count != 0) noItem = true;
+    //    return !noItem;
+    //}
 
-    public int NoExtraItem()
-    {
-        List<Item> orderItems = GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetItems();
-        return GetItemsPrice() - GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetPrice();
-    }
+    //public int NoExtraItem()
+    //{
+    //    List<Item> orderItems = GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetItems();
+    //    return GetItemsPrice() - GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetPrice();
+    //}
 
-    public int EnoughCash()
-    {
-        return GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetPrice() - GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetCashAmount();
-    }
+    //public int EnoughCash()
+    //{
+    //    return GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetPrice() - GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetCashAmount();
+    //}
 
-    private int GetItemsAmount()
-    {
-        int amount = 0;
-        foreach (Item item in items)
-        {
-            amount += item.amount;
-        }
-        return amount;
-    }
+    //private int GetItemsAmount()
+    //{
+    //    int amount = 0;
+    //    foreach (Item item in items)
+    //    {
+    //        amount += item.amount;
+    //    }
+    //    return amount;
+    //}
 
-    public int GetItemsPrice()
-    {
-        int price = 0;
-        foreach (Item item in items)
-        {
-            price += item.amount * item.GetPrice();
-        }
-        Item paper = new Item { itemType = Item.ItemType.Paper, amount = 1 };
-        price += paper.GetPrice() * papers.Count;
-        return price;
-    }
+    //public int GetItemsPrice()
+    //{
+    //    int price = 0;
+    //    foreach (Item item in items)
+    //    {
+    //        price += item.amount * item.GetPrice();
+    //    }
+    //    Item paper = new Item { itemType = Item.ItemType.Paper, amount = 1 };
+    //    price += paper.GetPrice() * papers.Count;
+    //    return price;
+    //}
 
     public void DeleteOrderItems()
     {

@@ -7,7 +7,7 @@ using TMPro;
 public class DialogManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
-    public TextMeshProUGUI dialogText;
+    public Text dialogText;
     public Animator animator;
     public GameObject orderButton, refuseButton, continueButton, workSpace, askCash, returnCash;
     public static bool isMoney;
@@ -36,6 +36,7 @@ public class DialogManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         if (sentences.Count == 0)
         {
             if (DataHolder.dayStarted)
@@ -59,7 +60,8 @@ public class DialogManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogText.text += letter;
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0f);
+            //yield return new WaitForSeconds(0.005f);
         }
     }
 
@@ -80,6 +82,7 @@ public class DialogManager : MonoBehaviour
 
     public void ShowWorkspace()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         workSpace.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         //GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().localScale = new Vector3(0,0,0);
         orderButton.SetActive(false);
@@ -88,6 +91,8 @@ public class DialogManager : MonoBehaviour
 
     public void Refuse()
     {
+        FindObjectOfType<Sound>().ButtonSound();
+        Workspace workspace = FindObjectOfType<Workspace>();
         animator.SetBool("Show", false);        
         DataHolder.currentClientComplete = true;
         orderButton.SetActive(false);
@@ -96,26 +101,37 @@ public class DialogManager : MonoBehaviour
         continueButton.SetActive(true);
         workSpace.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
         FindObjectOfType<GameController>().UpdateClientsCount();
-        if (FindObjectOfType<OrderSlot>().EnoughCash() == 0 && !isMoney)
-        {
-            FindObjectOfType<Workspace>().InstantiateWarning(Warning.WarningType.NoReasonRefuse);
-            FindObjectOfType<Player>().ReduceAuthority(5);
-        }
-        else if (FindObjectOfType<OrderSlot>().EnoughCash() > 0 && !isMoney)
-        {
-            FindObjectOfType<Player>().AddAuthority(5);
-        }
-        if (isMoney)
-        {
-            FindObjectOfType<Workspace>().InstantiateWarning(Warning.WarningType.GetMoneyRefuse);
-            FindObjectOfType<Player>().AddMoney(GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetCashAmount());
-            FindObjectOfType<Player>().ReduceAuthority(10);
-        }
+        FindObjectOfType<OrderCheck>().CheckOnRefuse();
+        //if (DataHolder.nameCheckEnabled)
+        //{
+        //    if (!isMoney && !workspace.checkName(workspace.getOrder(), workspace.GetPlayer()))
+        //    {
+        //        Debug.Log("Correct order");
+        //        workspace.GetPlayer().AddAuthority(5);
+        //        return;
+        //    }
+        //}
+        //if (FindObjectOfType<OrderSlot>().EnoughCash() == 0 && !isMoney && workspace.checkName(workspace.getOrder(), workspace.GetPlayer()))
+        //{
+        //    FindObjectOfType<Workspace>().InstantiateWarning(Warning.WarningType.NoReasonRefuse);
+        //    FindObjectOfType<Player>().ReduceAuthority(5);
+        //}
+        //else if (FindObjectOfType<OrderSlot>().EnoughCash() > 0 && !isMoney)
+        //{
+        //    FindObjectOfType<Player>().AddAuthority(5);
+        //}
+        //if (isMoney)
+        //{
+        //    FindObjectOfType<Workspace>().InstantiateWarning(Warning.WarningType.GetMoneyRefuse);
+        //    FindObjectOfType<Player>().AddMoney(GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetCashAmount());
+        //    FindObjectOfType<Player>().ReduceAuthority(10);
+        //}
         //GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
     }
 
     public void ReturnMoney()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         isMoney = false;
         returnCash.SetActive(false);
         FindObjectOfType<OrderSlot>().DeleteCash();
@@ -138,6 +154,7 @@ public class DialogManager : MonoBehaviour
     {
         if (!isMoney)
         {
+            FindObjectOfType<Sound>().CoinSound();
             Cash[] money = GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().cash;
             foreach (Cash cash in money)
             {

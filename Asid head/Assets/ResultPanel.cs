@@ -12,6 +12,7 @@ public class ResultPanel : MonoBehaviour
     int currentCash, currentDebt, currentSalary, currentAuthority, foodCost, rentCost;
     public GameObject results, expenses, warningText;
     public Text daysHome, daysFood, daysDebt;
+    public GameObject final;
 
     void Start()
     {
@@ -64,6 +65,7 @@ public class ResultPanel : MonoBehaviour
 
     public void LoadExpenses()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         results.SetActive(false);
         expenses.SetActive(true);
         foodCost = FindObjectOfType<GameController>().foodCost;
@@ -119,6 +121,7 @@ public class ResultPanel : MonoBehaviour
 
     public void LoadNextDay()
     {
+        FindObjectOfType<Sound>().ButtonSound();
         int sceneIndex = FindObjectOfType<GameController>().sceneIndex;
         if (currentSalary >= 0)
         {
@@ -130,7 +133,12 @@ public class ResultPanel : MonoBehaviour
             }
             else
             {
-                if (DataHolder.daysDebt > 1)
+                if (currentDebt == 0)
+                {
+                    PlayerPrefs.SetInt("Debt", currentDebt);
+                    PlayerPrefs.SetInt("DaysDebt", DataHolder.daysDebt);
+                }
+                else if (DataHolder.daysDebt > 1)
                 {
                     PlayerPrefs.SetInt("Debt", currentDebt);
                     PlayerPrefs.SetInt("DaysDebt", DataHolder.daysDebt - 1);
@@ -138,6 +146,9 @@ public class ResultPanel : MonoBehaviour
                 else
                 {
                     Debug.Log("Game Over! Debt");
+                    Final f = Instantiate(final, GameObject.Find("FinalsContainer").transform).GetComponent<Final>();
+                    f.showFinal(Final.FinalType.debt);
+                    return;
                 }
             }
             PlayerPrefs.SetInt("Authority", currentAuthority);
@@ -162,6 +173,16 @@ public class ResultPanel : MonoBehaviour
                 else
                 {
                     Debug.Log("Game Over! Rent");
+                    Final f = Instantiate(final, GameObject.Find("FinalsContainer").transform).GetComponent<Final>();
+                    if (currentAuthority >= 70)
+                    {
+                        f.showFinal(Final.FinalType.homeHigh);
+                    }
+                    else
+                    {
+                        f.showFinal(Final.FinalType.homeLow);
+                    }
+                    return;
                 }
             }
 
@@ -185,13 +206,26 @@ public class ResultPanel : MonoBehaviour
                 else
                 {
                     Debug.Log("Game Over! Food");
+                    Final f = Instantiate(final, GameObject.Find("FinalsContainer").transform).GetComponent<Final>();
+                    f.showFinal(Final.FinalType.food);
+                    return;
                 }
             }
 
 
-            if (sceneIndex == 2)
+            if (sceneIndex == 5)
             {
-                FindObjectOfType<SceneTransitions>().LoadScene(0);
+                if (currentAuthority >= 90)
+                {
+                    Final f = Instantiate(final, GameObject.Find("FinalsContainer").transform).GetComponent<Final>();
+                    f.showFinal(Final.FinalType.high);
+                }
+                else
+                {
+                    Final f = Instantiate(final, GameObject.Find("FinalsContainer").transform).GetComponent<Final>();
+                    f.showFinal(Final.FinalType.low);
+                }
+                return;
             }
             else
             {
