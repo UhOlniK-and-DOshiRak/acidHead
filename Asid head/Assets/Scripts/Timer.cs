@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
     
     void Start()
     {
+        timeText.color = Color.green;
         waitfor = 1f;
         timeText.text = minutes + ":" + sec;
         if (minutes > 0)
@@ -40,6 +41,11 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
+        if (minutes == 0 && sec == 30)
+        {
+            timeText.color = Color.red;
+        }
+
         if (sec == 0 && minutes == 0 && DataHolder.dayStarted)
         {
             //StopCoroutine(second());

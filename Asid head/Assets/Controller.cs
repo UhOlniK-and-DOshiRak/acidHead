@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class Controller : MonoBehaviour
     void Start()
     {
         sceneIndex = PlayerPrefs.GetInt("Level", 2);
+        if (sceneIndex == 2)
+        {
+            GameObject.Find("Continue").GetComponent<Button>().enabled = false;
+            GameObject.Find("Continue").GetComponent<Animator>().SetTrigger("Disabled");
+        }
+        else
+            GameObject.Find("Continue").GetComponent<Button>().enabled = true;
         sceneTransitions = FindObjectOfType<SceneTransitions>();
     }
 
