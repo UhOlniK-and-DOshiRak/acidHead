@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        
+
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         PlayerPrefs.SetInt("Level", sceneIndex);        
 

@@ -10,6 +10,7 @@ public class OrderSlot : MonoBehaviour, IDropHandler
     [SerializeField] private List<ItemSlot> itemSlots;
     [SerializeField] private List<Paper> papers;
     [SerializeField] private List<Item> items;
+    public GameObject label;
     //bool isPackage;
 
         public int GetPapersCount()
@@ -24,6 +25,7 @@ public class OrderSlot : MonoBehaviour, IDropHandler
         items = new List<Item>();
         itemSlots = new List<ItemSlot>();
         papers = new List<Paper>();
+        SetLabel();
         //isPackage = false;
     }
 
@@ -61,6 +63,7 @@ public class OrderSlot : MonoBehaviour, IDropHandler
             Attach(eventData);
             papers.Add(eventData.pointerDrag.GetComponent<Paper>());
         }
+        SetLabel();
     }
 
     private void Attach(PointerEventData eventData)
@@ -68,6 +71,7 @@ public class OrderSlot : MonoBehaviour, IDropHandler
         eventData.pointerDrag.GetComponent<RectTransform>().SetParent(transform);
         eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = transform.GetComponent<RectTransform>().anchoredPosition;
         eventData.pointerDrag.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        SetLabel();
     }
 
     public void ClearSlot()
@@ -87,6 +91,20 @@ public class OrderSlot : MonoBehaviour, IDropHandler
         itemSlots = new List<ItemSlot>();
         items = new List<Item>();
         papers = new List<Paper>();
+        SetLabel();
+    }
+
+    public void SetLabel()
+    {
+        if (items.Count <= 0 && papers.Count <=0)
+        {
+            label.SetActive(true);
+        }
+        else
+        {
+            label.SetActive(false);
+            Debug.Log("Label inactive");
+        }
     }
 
     //public bool isPapers()

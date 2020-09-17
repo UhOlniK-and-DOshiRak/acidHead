@@ -44,21 +44,22 @@ public class Workspace : MonoBehaviour
 
     public void GetPaper()
     {
-        if (!paperInstantiated)
-        {
+        //if (!paperInstantiated)
+        //{
             RectTransform rectTransform = Instantiate(paper, GameObject.Find("ItemWorldContainer").transform).GetComponent<RectTransform>();
             rectTransform.anchoredPosition = GameObject.Find("PosPaper").GetComponent<RectTransform>().anchoredPosition;
+        rectTransform.SetAsFirstSibling();
             paperInstantiated = true;
             FindObjectOfType<Sound>().ButtonSound();
-        }
+        //}
     }
 
     public void GetTabacco()
     {
-        if (paperInstantiated)
-        {
+        //if (paperInstantiated)
+        //{
             ItemWorld.DropTabacco();
-        }
+        //}
     }
 
     public void ClearOrderSlot()
@@ -69,88 +70,14 @@ public class Workspace : MonoBehaviour
 
     public void Sale()
     {
+        
         FindObjectOfType<Sound>().ButtonSound();
-        //Player player = FindObjectOfType<Player>();
-        OrderSlot orderSlot = GameObject.Find("OrderContainer").GetComponent<OrderSlot>();
-        //int orderPrice = orderSlot.GetItemsPrice();
-        //if (!orderSlot.isItems())
-        //{
-        //    Debug.Log("No items");
-        //}
-        //if (!orderSlot.isPapers())
-        //{
-        //    Debug.Log("No papers");
-        //}
-        //if (orderSlot.NoExtraItem() < 0)
-        //{
-        //    Debug.Log("Get " + Mathf.Abs(orderSlot.NoExtraItem()));
-        //}
-        //else if (orderSlot.NoExtraItem() > 0)
-        //{
-        //    Debug.Log("Loss " + orderSlot.NoExtraItem());
-        //    player.ReduceMoney(orderSlot.NoExtraItem());
-        //}
-        //if (orderSlot.EnoughCash() > 0)
-        //{
-        //    Debug.Log("Need "+ orderSlot.EnoughCash() + " more money");
-        //    player.ReduceMoney(orderSlot.EnoughCash());
-        //}
-        //if (!DialogManager.isMoney)
-        //{
-        //    Debug.Log("Forgot to take Money!");
-        //    InstantiateWarning(Warning.WarningType.DoNotGetMoney);
-        //    player.ReduceMoney(orderSlot.GetItemsPrice());
-        //}
-        //else
-        //{
-        //    player.AddMoney(GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().GetCashAmount());
-        //    if (!orderSlot.isItems() || !orderSlot.isPapers())
-        //    {
-        //        InstantiateWarning(Warning.WarningType.NoItem);
-        //        player.ReduceAuthority(5);
-        //    }
-        //    if (orderSlot.NoExtraItem() > 0)
-        //    {
-        //        player.ReduceMoney(orderSlot.NoExtraItem());
-        //        InstantiateWarning(Warning.WarningType.ExtraItem);
-        //    }
-        //    else if (orderSlot.EnoughCash() > 0)
-        //    {
-        //        InstantiateWarning(Warning.WarningType.NotEnoughMoney);
-        //        player.ReduceMoney(orderSlot.EnoughCash());
-        //    }
-
-        //}
-
-        //if (DataHolder.nameCheckEnabled)
-        //{
-        //    if (!checkName(getOrder(), player))
-        //    {
-        //        InstantiateWarning(Warning.WarningType.WrongName);
-        //        player.ReduceAuthority(5);
-        //    }
-        //}
-
-        //if (orderSlot.isItems() && orderSlot.isPapers() && orderSlot.NoExtraItem() == 0 && orderSlot.EnoughCash() == 0 && DialogManager.isMoney)
-        //{
-        //    if (DataHolder.nameCheckEnabled)
-        //    {
-        //        if (checkName(getOrder(), player))
-        //        {
-        //            Debug.Log("Correct order");
-        //            FindObjectOfType<Player>().AddAuthority(5);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Correct order");
-        //        FindObjectOfType<Player>().AddAuthority(5);
-        //    }      
-        //}
-
+        OrderSlot orderSlot = GameObject.Find("OrderContainer").GetComponent<OrderSlot>();        
         FindObjectOfType<OrderCheck>().CheckOnSale();        
         orderSlot.DeleteOrderItems();
         FindObjectOfType<DialogManager>().Sale();
+        FindObjectOfType<OrderSlot>().SetLabel();
+        FindObjectOfType<CashCount>().Clear();
     }
 
     //public void InstantiateWarning(Warning.WarningType type)

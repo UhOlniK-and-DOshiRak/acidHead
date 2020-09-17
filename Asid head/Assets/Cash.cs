@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class Cash : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public int value;
+    public int amount;
 
     private Canvas canvas;
     private RectTransform rectTransform;
@@ -18,6 +19,7 @@ public class Cash : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
         Debug.Log("OnBeginDrag");
     }
 
@@ -45,6 +47,7 @@ public class Cash : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
         Debug.Log("OnEndDrag");
     }
 }

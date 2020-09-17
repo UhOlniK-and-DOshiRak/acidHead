@@ -11,6 +11,7 @@ public class DialogManager : MonoBehaviour
     public Animator animator;
     public GameObject orderButton, refuseButton, continueButton, workSpace, askCash, returnCash;
     public static bool isMoney;
+    public GameObject cashTab;
 
     private Queue<string> sentences;
 
@@ -22,6 +23,7 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(Dialog dialog)
     {
+        cashTab.SetActive(false);
         returnCash.SetActive(false);
         isMoney = false;
         animator.SetBool("Show", true);
@@ -67,6 +69,7 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialog()
     {
+        
         orderButton.SetActive(true);
         refuseButton.SetActive(true);
         continueButton.SetActive(false);
@@ -82,6 +85,7 @@ public class DialogManager : MonoBehaviour
 
     public void ShowWorkspace()
     {
+        cashTab.SetActive(true);
         FindObjectOfType<Sound>().ButtonSound();
         workSpace.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         //GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().localScale = new Vector3(0,0,0);
@@ -102,6 +106,8 @@ public class DialogManager : MonoBehaviour
         workSpace.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
         FindObjectOfType<GameController>().UpdateClientsCount();
         FindObjectOfType<OrderCheck>().CheckOnRefuse();
+        FindObjectOfType<OrderSlot>().SetLabel();
+        FindObjectOfType<CashCount>().Clear();
         //if (DataHolder.nameCheckEnabled)
         //{
         //    if (!isMoney && !workspace.checkName(workspace.getOrder(), workspace.GetPlayer()))
@@ -135,10 +141,12 @@ public class DialogManager : MonoBehaviour
         isMoney = false;
         returnCash.SetActive(false);
         FindObjectOfType<OrderSlot>().DeleteCash();
+        FindObjectOfType<CashCount>().Clear();
     }
 
     public void Sale()
     {
+        cashTab.SetActive(false);
         animator.SetBool("Show", false);
         DataHolder.currentClientComplete = true;
         orderButton.SetActive(false);
@@ -147,6 +155,8 @@ public class DialogManager : MonoBehaviour
         continueButton.SetActive(true);
         workSpace.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
         FindObjectOfType<GameController>().UpdateClientsCount();
+        FindObjectOfType<OrderSlot>().SetLabel();
+        FindObjectOfType<CashCount>().Clear();
         //GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
     }
 
@@ -158,7 +168,7 @@ public class DialogManager : MonoBehaviour
             Cash[] money = GameObject.FindGameObjectWithTag("Client").GetComponent<Order>().cash;
             foreach (Cash cash in money)
             {
-                RectTransform rectTransform = Instantiate(cash, GameObject.Find("ItemWorldContainer").transform).GetComponent<RectTransform>();
+                RectTransform rectTransform = Instantiate(cash, GameObject.Find("ItemWorldContainerCash").transform).GetComponent<RectTransform>();
                 rectTransform.anchoredPosition = GameObject.Find("PosCash").GetComponent<RectTransform>().anchoredPosition;
             }
             isMoney = true;

@@ -7,7 +7,7 @@ public class Sound : MonoBehaviour
     public static Sound instance;
 
     private AudioSource source;
-    public AudioClip coin, message, warning;
+    public AudioClip coin, message, warning, openCash, tumbler;
     public AudioClip[] book;
     public AudioClip[] button;
 
@@ -58,6 +58,18 @@ public class Sound : MonoBehaviour
     {
         int randomNaumber = Random.Range(0, button.Length);
         source.clip = button[randomNaumber];
+        source.Play();
+    }
+
+    public void OpenCashSound()
+    {
+        source.clip = openCash;
+        source.Play();
+    }
+
+    public void TumblerSound()
+    {
+        source.clip = tumbler;
         source.Play();
     }
 }

@@ -12,6 +12,7 @@ TagManager:
   - Tabacco
   - PosTabacco
   - Cash
+  - Car
   layers:
   - Default
   - TransparentFX

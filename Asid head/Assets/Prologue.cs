@@ -57,5 +57,10 @@ public class Prologue : MonoBehaviour
         sceneTransitions.LoadScene(2);
     }
 
+    public void SkipDialog()
+    {
+        sceneTransitions.LoadScene(2);
+    }
+
 
 }

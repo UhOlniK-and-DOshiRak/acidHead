@@ -84,6 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7632140533829335199}
   - component: {fileID: 7632140533829335136}
+  - component: {fileID: -7963420649462030860}
   m_Layer: 5
   m_Name: Cash15
   m_TagString: Cash
@@ -100,7 +101,7 @@ RectTransform:
   m_GameObject: {fileID: 7632140533829335198}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 7632140533144009988}
   m_Father: {fileID: 0}
@@ -124,3 +125,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 15
+  amount: 1
+--- !u!225 &-7963420649462030860
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632140533829335198}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

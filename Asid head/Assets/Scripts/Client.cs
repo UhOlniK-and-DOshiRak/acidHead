@@ -8,6 +8,7 @@ public class Client : MonoBehaviour
     Transform stopPoint, gonePoint;
     bool onStopPoint, alreadySelected;
     public GameObject onStopIcon;
+    public GameObject outline;
     DialogTrigger dialogTrigger;
 
     public enum ClientType
@@ -30,6 +31,7 @@ public class Client : MonoBehaviour
         DataHolder.currentClientComplete = false;
         dialogTrigger = GetComponent<DialogTrigger>();
         alreadySelected = false;
+        outline.SetActive(false);
     }
 
     private void Update()
@@ -43,7 +45,8 @@ public class Client : MonoBehaviour
             else
             {
                 onStopPoint = true;
-                onStopIcon.SetActive(true);
+                //onStopIcon.SetActive(true);
+                outline.SetActive(true);
             }
         }
         else
@@ -66,9 +69,10 @@ public class Client : MonoBehaviour
     {
         if (onStopPoint == true && DataHolder.currentClientComplete == false && alreadySelected == false)
         {
-            FindObjectOfType<Sound>().ButtonSound();
+            //FindObjectOfType<Sound>().ButtonSound();
             Debug.Log("Order price: " + GetComponent<Order>().GetPrice());
-            Destroy(onStopIcon);
+            //Destroy(onStopIcon);
+            Destroy(outline);
             dialogTrigger.TriggerDialog();
             alreadySelected = true;
             //DataHolder.currentClientComplete = true;

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Book : MonoBehaviour, IDragHandler
 {
-    public GameObject page1, page2;
+    public GameObject page1, page2, page3;
     private RectTransform rectTransform;
     private Canvas canvas;
     private Vector3 initialRectTransform;
@@ -28,7 +28,22 @@ public class Book : MonoBehaviour, IDragHandler
     {
         FindObjectOfType<Sound>().BookSound();
         page1.SetActive(false);
+        page2.SetActive(true);
     }
+
+    public void ToPage3()
+    {
+        FindObjectOfType<Sound>().BookSound();
+        page2.SetActive(false);
+        page3.SetActive(true);
+    }
+
+    public void ToPage4()
+    {
+        FindObjectOfType<Sound>().BookSound();
+        page3.SetActive(false);
+    }
+
 
     public void Close()
     {

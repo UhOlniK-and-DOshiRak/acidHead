@@ -24,6 +24,7 @@ public class Warning : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        Invoke("OnClick", 3f);
     }
 
     public void OnClick()
